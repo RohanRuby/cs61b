@@ -139,7 +139,7 @@ public class Model extends Observable {
                         if(t2 != null  && (newRow +1) < lastMergeRow && t.value() == t2.value() ) {
                             newRow = newRow + 1;
                             lastMergeRow = newRow;
-                            score += t.value();
+                            score += t.value()*2;
 
                         }
                     }
