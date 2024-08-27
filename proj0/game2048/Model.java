@@ -136,13 +136,10 @@ public class Model extends Observable {
                         int newRow0 = side.row(col, newRow+1, board.size());
                         int newCol0 = side.col(col, newRow+1, board.size());
                         Tile t2 = board.tile(newCol0, newRow0);
-                        if(t2 != null  && (newRow +1) < lastMergeRow ) {
-                            int v1 = t.value();
-                            int v2 = t2.value();
-                            if(v1 == v2){
-                                newRow = newRow + 1;
-                                lastMergeRow = newRow;
-                            }
+                        if(t2 != null  && (newRow +1) < lastMergeRow && t.value() == t2.value() ) {
+                            newRow = newRow + 1;
+                            lastMergeRow = newRow;
+                            score += t.value();
 
                         }
                     }
@@ -152,7 +149,7 @@ public class Model extends Observable {
                         //int r = side.row(col0, newRow, board.size());
                         int c = side.col(col, newRow, board.size());
                         int r = side.row(col, newRow, board.size());
-                        score += t.value();
+
                         board.move(c, r, t);
                         changed = true;
 
