@@ -8,71 +8,58 @@ public class ArrayDeque<T> {
     private T[] array;
 
     public ArrayDeque(){
+        int defaultLength = 8;
         size = 0;
-        array = (T[]) new Object[8]; // Use object array
-        nextFirst = 4;
-        nextLast = 5;
+        array = (T[]) new Object[defaultLength]; // Use object array
+        nextFirst = defaultLength/2;
+        nextLast = nextFirst + 1;
     }
-    private void resize(int dir, int capacity){
+    private void resize(int capacity){
         T[] newArray = (T[]) new Object[capacity];
-        // resize the left
-        if(dir == 1){
-            for(int i = nextFirst + 1; i < nextLast; i++)
-                newArray[i + capacity - array.length - nextFirst - 1] = array[i];
-            //int oldFirst = nextFirst;
-            //int oldNext = nextLast;
-            nextLast = capacity + nextLast - array.length - nextFirst - 1;
-            nextFirst = capacity - array.length - 1;
-            array = newArray;
-        }
-        //resize the right
-        if(dir == -1){
-            for(int i = nextFirst + 1; i < nextLast; i++)
-                newArray[i] = array[i];
-            array = newArray;
-            //nextFirst = size - 1;
-        }
-        // smaller
-        if(dir == 0){
-            for(int i = nextFirst + 1; i < nextLast; i++)
-                newArray[(capacity - this.size)/2 + i - nextFirst - 1] = array[i];
-            int oldNextFirst = nextFirst;
-            nextFirst = (capacity - this.size)/2 - 1;
-            nextLast = (capacity - this.size)/2 + nextLast - oldNextFirst - 1;
-            array = newArray;
-        }
+        for(int i = 0; i < size; i++)
+            newArray[i] = array[i % capacity];
+        nextLast = size;
+        nextFirst = capacity - 1;
+        array = newArray;
     }
     public void addFirst(T val){
-        if(nextFirst == -1)
-            resize(1, array.length*2);
+        if(size == array.length)
+            resize(array.length*2);
         array[nextFirst] = val;
         size++;
         nextFirst--;
+        if(nextFirst == -1) nextFirst = array.length - 1;
     }
 
     public void addLast(T val){
-        if(nextLast == array.length)
-            resize(-1, array.length*2);
+        if(size == array.length)
+            resize(array.length*2);
         //System.out.println("nextlast: " + nextLast + " length: " + array.length);
+
         array[nextLast] = val;
         size++;
         nextLast++;
+        nextLast = nextLast % array.length;
     }
 
     public T removeFirst(){
-        if(this.size() < array.length/4) resize(0, array.length/4);
+        if (this.size() < array.length/4) resize(array.length/4);
         if (this.isEmpty()) return null;
-        T val = array[nextFirst + 1];
+        int index = (nextFirst + 1) % array.length;
+        T val = array[index];
         nextFirst++;
+        nextFirst = nextFirst % array.length;
         size--;
         return val;
     }
 
     public T removeLast(){
-        if(this.size() < array.length/4) resize(0, array.length/4);
+        if (this.size() < array.length/4) resize( array.length/4);
         if (this.isEmpty()) return null;
-        T val = array[nextLast - 1];
-        nextLast--;
+        int index = nextLast - 1;
+        if(index < 0) index = index + array.length;
+        T val = array[index];
+        nextLast = index;
         size--;
         return val;
 
