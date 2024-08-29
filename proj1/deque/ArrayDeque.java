@@ -83,13 +83,16 @@ public class ArrayDeque<T> {
     }
 
     public boolean isEmpty(){
-        if(this.size() == 0) return true;
-        else return false;
+        return this.size() == 0 ;
     }
 
     public void printDeque(){
         for(int i = nextFirst + 1; i< nextLast; i++){
             System.out.println(array[i]);
         }
+    }
+
+    public T get(int i){
+        return array[i];
     }
 }
