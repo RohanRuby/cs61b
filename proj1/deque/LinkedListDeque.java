@@ -1,6 +1,6 @@
 package deque;
 
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Deque<T>{
     private int size;
     private Node front;
     private Node back;
@@ -24,18 +24,18 @@ public class LinkedListDeque<T> {
     public int size(){
         return size;
     }
-    public void addFirst(T val){
+    public void addFirst(T item){
 
         // If empty, initialize
         if(this.isEmpty()){
-            Node n = new Node(val);
+            Node n = new Node(item);
             front = n;
             back = n;
             size++;
             return;
         }
         // Make the first node
-        Node firstNode = new Node(val);
+        Node firstNode = new Node(item);
         firstNode.next = front;
         front.prev = firstNode;
         front = firstNode;
@@ -62,11 +62,11 @@ public class LinkedListDeque<T> {
         return val;
     }
 
-    public void addLast(T val){
+    public void addLast(T item){
 
         // If empty, initialize
         if(isEmpty()){
-            Node n = new Node(val);
+            Node n = new Node(item);
             front = n;
             back = n;
             size++;
@@ -74,7 +74,7 @@ public class LinkedListDeque<T> {
         }
 
         // Add last node to the list
-        Node lastNode = new Node(val);
+        Node lastNode = new Node(item);
         back.next = lastNode;
         lastNode.prev = back;
         back = lastNode;

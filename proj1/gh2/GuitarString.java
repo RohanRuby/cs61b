@@ -58,4 +58,3 @@ public class GuitarString {
         return buffer.get(0);
     }
 }
- 

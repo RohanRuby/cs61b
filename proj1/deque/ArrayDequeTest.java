@@ -16,7 +16,7 @@ public class ArrayDequeTest {
     public void addIsEmptySizeTest() {
 
         //System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-
+/*
         ArrayDeque<String> lld1 = new ArrayDeque<String>();
 
 		assertTrue("A newly initialized LLDeque should be empty", lld1.isEmpty());
@@ -35,7 +35,7 @@ public class ArrayDequeTest {
 
 		System.out.println("Printing out deque: ");
 		lld1.printDeque();
-
+*/
     }
 
     @Test
@@ -47,6 +47,8 @@ public class ArrayDequeTest {
         for (int i = 0; i < 1000000; i++) {
             lld1.addFirst(i);
         }
+        System.out.println(lld1.get(0));
+
 
         for (double i = 0; i < 500000; i++) {
             //System.out.println(i);

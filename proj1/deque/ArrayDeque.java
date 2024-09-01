@@ -1,6 +1,6 @@
 package deque;
 
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
@@ -18,29 +18,27 @@ public class ArrayDeque<T> {
     private void resize(int capacity){
         T[] newArray = (T[]) new Object[capacity];
         int ptr = getIndexPlus(nextFirst);
-        int i = 0;
-        while(ptr != nextLast || i == 0 ){
+        for (int i = 0; i < size; i++) {
             newArray[i] = array[ptr];
             ptr = getIndexPlus(ptr);
-            i++;
         }
         array = newArray;
         nextFirst = array.length - 1;
         nextLast = size;
     }
 
-    public void addFirst(T val){
+    public void addFirst(T item){
         if(size == array.length)
             resize(array.length*2);
-        array[nextFirst] = val;
+        array[nextFirst] = item;
         size++;
         nextFirst = getIndexMinus(nextFirst);
     }
 
-    public void addLast(T val){
+    public void addLast(T item){
         if(size == array.length)
             resize(array.length*2);
-        array[nextLast] = val;
+        array[nextLast] = item;
         size++;
         nextLast = getIndexPlus(nextLast);
     }
@@ -72,20 +70,18 @@ public class ArrayDeque<T> {
 
     public void printDeque(){
         int ptr = getIndexPlus(nextFirst);
-        int total = size;
-        while(ptr != nextLast || total > 0){
+        for (int i = 0; i < size; i++) {
             System.out.print(array[ptr] + " ");
             ptr = getIndexPlus(ptr);
-            total--;
         }
     }
 
-    public T get(int i){
-        if (i < 0 || i >= size)
+    public T get(int index){
+        if (index < 0 || index >= size)
             return null;
 
-        int index = (getIndexPlus(nextFirst) + i) % array.length;
-        return array[index];
+        int i = (getIndexPlus(nextFirst) + index) % array.length;
+        return array[i];
     }
 
     private int getIndexMinus(int index){
