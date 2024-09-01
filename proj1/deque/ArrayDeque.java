@@ -1,5 +1,6 @@
 package deque;
 
+
 public class ArrayDeque<T> implements Deque<T> {
     private int size;
     private int nextFirst;
@@ -93,4 +94,6 @@ public class ArrayDeque<T> implements Deque<T> {
         if(index == array.length - 1) return 0;
         return index + 1;
     }
+
+
 }

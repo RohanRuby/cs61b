@@ -1,5 +1,8 @@
 package deque;
 
+import java.util.Iterator;
+import java.util.function.Consumer;
+
 public class LinkedListDeque<T> implements Deque<T>{
     private int size;
     private Node front;
@@ -136,5 +139,32 @@ public class LinkedListDeque<T> implements Deque<T>{
             return n.data;
         else
             return getRecursiveHelper(n.next, index-1);
+    }
+
+    public Iterator<T> iterator(){
+        return new LinkedListIterator<T>();
+    }
+
+    public class LinkedListIterator<T> implements Iterator<T> {
+        private Node current = front;
+        private Node lastReturned = null;
+        @Override
+        public boolean hasNext() {
+            return front.next != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) return null;
+            lastReturned = current;
+            current = current.next;
+            return (T) lastReturned.data;
+        }
+
+        @Override
+        public void remove(){
+            
+        }
+
     }
 }
