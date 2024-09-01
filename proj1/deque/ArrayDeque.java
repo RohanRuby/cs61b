@@ -81,7 +81,11 @@ public class ArrayDeque<T> {
     }
 
     public T get(int i){
-        return array[i];
+        if (i < 0 || i >= size)
+            return null;
+
+        int index = (getIndexPlus(nextFirst) + i) % array.length;
+        return array[index];
     }
 
     private int getIndexMinus(int index){
