@@ -163,8 +163,24 @@ public class LinkedListDeque<T> implements Deque<T>{
 
         @Override
         public void remove(){
-            
+
         }
+
+    }
+
+    public boolean equals(Object o){
+        LinkedListDeque<T> target = (LinkedListDeque<T>) o;
+        Node n1 = front;
+        Node n2 = target.front;
+        while(n1 != null){
+            if(n2 == null) return false;
+            if(n1.data != null) {
+                if(n2.data == null || n1.data != n2.data) return false;
+            }
+            n1 = n1.next;
+            n2 = n2.next;
+        }
+        return false;
 
     }
 }
