@@ -112,7 +112,7 @@ public class LinkedListDeque<T> implements Deque<T>{
         }
     }
 
-    public boolean isEmpty(){
+    private boolean isEmpty(){
         if(size == 0) return true;
         return false;
     }
@@ -133,7 +133,7 @@ public class LinkedListDeque<T> implements Deque<T>{
         return getRecursiveHelper(front, index);
     }
 
-    public T getRecursiveHelper(Node n, int index){
+    private T getRecursiveHelper(Node n, int index){
         if(n == null) return null;
         if(index == 0)
             return n.data;
@@ -150,7 +150,7 @@ public class LinkedListDeque<T> implements Deque<T>{
         private Node lastReturned = null;
         @Override
         public boolean hasNext() {
-            return front.next != null;
+            return current.next != null;
         }
 
         @Override
@@ -169,18 +169,24 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     public boolean equals(Object o){
-        LinkedListDeque<T> target = (LinkedListDeque<T>) o;
-        Node n1 = front;
-        Node n2 = target.front;
-        while(n1 != null){
-            if(n2 == null) return false;
-            if(n1.data != null) {
-                if(n2.data == null || n1.data != n2.data) return false;
+        if (o instanceof LinkedListDeque) {
+            LinkedListDeque<T> target = (LinkedListDeque<T>) o;
+            if(target.front == null && front == null) return true;
+            else if (target.front != null && front != null) {
+                Node n1 = front;
+                Node n2 = target.front;
+                while (n1 != null) {
+                    if (n2 == null) return false;
+                    if (n1.data != null) {
+                        if (n2.data == null || n1.data != n2.data) return false;
+                    }
+                    n1 = n1.next;
+                    n2 = n2.next;
+                }
+                return true;
             }
-            n1 = n1.next;
-            n2 = n2.next;
+            return false;
         }
-        return false;
-
+        else return false;
     }
 }

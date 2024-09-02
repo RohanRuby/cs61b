@@ -2,6 +2,10 @@ package deque;
 
 import org.junit.Test;
 
+import javax.swing.text.html.HTMLDocument;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 
@@ -63,7 +67,30 @@ public class ArrayDequeTest {
 
     }
 
+    @Test
+    public void EqualsTest() {
+        ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
+        for (int i = 0; i < 1000000; i++) {
+            ad1.addFirst(i);
+        }
+        boolean b = ad1.equals(null);
 
+    }
+
+    @Test
+    public void IteratorTest() {
+        ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
+        for (int i = 0; i < 10; i++) {
+            ad1.addFirst(i);
+        }
+        Iterator it = ad1.iterator();
+        while(it.hasNext()) {
+            Object i = it.next();
+            System.out.println(i);
+        }
+        boolean b = it.hasNext();
+
+    }
 
 
 

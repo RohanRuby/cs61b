@@ -125,13 +125,16 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public boolean equals (Object o){
-        ArrayDeque<T> target = (ArrayDeque<T>) o;
-        int ptr = getIndexPlus(nextFirst);
-        for (int i = 0; i < size; i++) {
-            if(target.array[ptr] == null) return false;
-            if(array[ptr] != target.array[ptr]) return false;
-            ptr = getIndexPlus(ptr);
+        if(o instanceof ArrayDeque) {
+            ArrayDeque<T> target = (ArrayDeque<T>) o;
+            if(target.size() != this.size()) return false;
+            int ptr = getIndexPlus(nextFirst);
+            for (int i = 0; i < size; i++) {
+                if (array[ptr] != target.array[ptr]) return false;
+                ptr = getIndexPlus(ptr);
+            }
+            return true;
         }
-        return true;
+        else return false;
     }
 }
