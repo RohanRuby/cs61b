@@ -10,7 +10,7 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         comparator = c;
     }
     public T max(){
-        if(this.isEmpty()) return null;
+        if(this.size() == 0) return null;
         T maxVal = this.get(0);
         for(int i = 0; i < this.size(); i++){
             T val = this.get(i);
@@ -20,7 +20,7 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         return maxVal;
     }
      public T max(Comparator<T> c){
-         if(this.isEmpty()) return null;
+         if(this.size() == 0) return null;
          T maxVal = this.get(0);
          for(int i = 0; i < this.size(); i++){
              T val = this.get(i);

@@ -3,7 +3,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
@@ -67,7 +67,7 @@ public class ArrayDeque<T> implements Deque<T> {
         return size;
     }
 
-    public boolean isEmpty(){
+    private boolean isEmpty(){
         return this.size() == 0 ;
     }
 
@@ -101,7 +101,7 @@ public class ArrayDeque<T> implements Deque<T> {
         return new ArrayDequeIterator();
     }
 
-    private class ArrayDequeIterator<T> implements Iterator<T>{
+    private class ArrayDequeIterator implements Iterator<T>{
         private int currentPos = getIndexPlus(nextFirst);
         private int elementsReturned = 0;
         @Override
@@ -125,16 +125,21 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public boolean equals (Object o){
-        if(o instanceof ArrayDeque) {
-            ArrayDeque<T> target = (ArrayDeque<T>) o;
-            if(target.size() != this.size()) return false;
-            int ptr = getIndexPlus(nextFirst);
-            for (int i = 0; i < size; i++) {
-                if (array[ptr] != target.array[ptr]) return false;
-                ptr = getIndexPlus(ptr);
-            }
-            return true;
+        if(this == o) return true;
+        if(!(o instanceof ArrayDeque)) return false;
+
+        ArrayDeque target = (ArrayDeque) o;
+        if(this.size() != target.size()) return false;
+
+        Iterator it1 = this.iterator();
+        Iterator it2 = target.iterator();
+
+        while(it1.hasNext() && it2.hasNext()) {
+            T item1 = (T) it1.next();
+            Object item2 = it2.next();
+            if (!item1.equals(item2)) return false;
         }
-        else return false;
+
+        return true;
     }
 }

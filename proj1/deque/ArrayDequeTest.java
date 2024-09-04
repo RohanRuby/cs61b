@@ -70,10 +70,14 @@ public class ArrayDequeTest {
     @Test
     public void EqualsTest() {
         ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
-        for (int i = 0; i < 1000000; i++) {
+        ArrayDeque<Integer> ad2 = new ArrayDeque<Integer>();
+        for (int i = 0; i < 10; i++) {
             ad1.addFirst(i);
+            ad2.addFirst(i);
         }
-        boolean b = ad1.equals(null);
+        ad2.removeFirst();
+        ad2.addFirst(111);
+        boolean b = ad1.equals(ad2);
 
     }
 

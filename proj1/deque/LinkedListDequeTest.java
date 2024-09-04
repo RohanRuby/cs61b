@@ -146,10 +146,12 @@ public class LinkedListDequeTest {
     /* Test  equals. */
     public void EqualTest() {
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        LinkedListDeque<Integer> lld2 = new LinkedListDeque();
         for (int i = 0; i < 1000000; i++) {
             lld1.addFirst(i);
+            lld2.addFirst(i);
         }
-        boolean b = lld1.equals(null);
+        boolean b = lld1.equals(lld2);
         assertEquals("Should have the same value", true, b);
 
     }

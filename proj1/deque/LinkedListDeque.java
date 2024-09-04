@@ -3,7 +3,7 @@ package deque;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-public class LinkedListDeque<T> implements Deque<T>{
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
     private int size;
     private Node front;
     private Node back;
@@ -112,7 +112,7 @@ public class LinkedListDeque<T> implements Deque<T>{
         }
     }
 
-    public boolean isEmpty(){
+    private boolean isEmpty(){
         if(size == 0) return true;
         return false;
     }
@@ -142,15 +142,15 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     public Iterator<T> iterator(){
-        return new LinkedListIterator<T>();
+        return new LinkedListIterator();
     }
 
-    public class LinkedListIterator<T> implements Iterator<T> {
+    private class LinkedListIterator implements Iterator<T> {
         private Node current = front;
         private Node lastReturned = null;
         @Override
         public boolean hasNext() {
-            return current.next != null;
+            return current != null;
         }
 
         @Override
@@ -169,24 +169,19 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     public boolean equals(Object o){
-        if (o instanceof LinkedListDeque) {
-            LinkedListDeque<T> target = (LinkedListDeque<T>) o;
-            if(target.front == null && front == null) return true;
-            else if (target.front != null && front != null) {
-                Node n1 = front;
-                Node n2 = target.front;
-                while (n1 != null) {
-                    if (n2 == null) return false;
-                    if (n1.data != null) {
-                        if (n2.data == null || n1.data != n2.data) return false;
-                    }
-                    n1 = n1.next;
-                    n2 = n2.next;
-                }
-                return true;
-            }
-            return false;
+        if(this == o) return true;
+        if(!(o instanceof LinkedListDeque)) return false;
+
+        LinkedListDeque target = (LinkedListDeque) o;
+        if(this.size() != target.size()) return false;
+
+        Iterator it1 = this.iterator();
+        Iterator it2 = target.iterator();
+
+        while(it1.hasNext() && it2.hasNext()) {
+            if(it1.next() != it2.next()) return false;
         }
-        else return false;
+
+        return true;
     }
 }
