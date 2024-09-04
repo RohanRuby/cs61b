@@ -3,7 +3,7 @@ package deque;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
+public class LinkedListDeque<T> implements Deque<T>{
     private int size;
     private Node front;
     private Node back;
