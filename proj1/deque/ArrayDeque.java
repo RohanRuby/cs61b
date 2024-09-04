@@ -127,8 +127,10 @@ public class ArrayDeque<T> implements Deque<T> {
     public boolean equals (Object o){
         if(this == o) return true;
         if(!(o instanceof Deque)) return false;
+        Deque target = null;
+        if(o instanceof ArrayDeque) target = (ArrayDeque) o;
+        if(o instanceof LinkedListDeque) target = (LinkedListDeque) o;
 
-        Deque<?> target = (Deque<?>) o;
         if(this.size() != target.size()) return false;
 
         Iterator it1 = this.iterator();

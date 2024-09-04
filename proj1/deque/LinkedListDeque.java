@@ -172,7 +172,10 @@ public class LinkedListDeque<T> implements Deque<T>{
         if(this == o) return true;
         if(!(o instanceof Deque)) return false;
 
-        Deque target = (Deque) o;
+        Deque target = null;
+        if(o instanceof ArrayDeque) target = (ArrayDeque) o;
+        if(o instanceof LinkedListDeque) target = (LinkedListDeque) o;
+
         if(this.size() != target.size()) return false;
 
         Iterator it1 = this.iterator();
