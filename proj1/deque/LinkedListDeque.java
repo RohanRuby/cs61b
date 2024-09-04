@@ -170,16 +170,18 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
 
     public boolean equals(Object o){
         if(this == o) return true;
-        if(!(o instanceof LinkedListDeque)) return false;
+        if(!(o instanceof Deque)) return false;
 
-        LinkedListDeque target = (LinkedListDeque) o;
+        Deque target = (Deque) o;
         if(this.size() != target.size()) return false;
 
         Iterator it1 = this.iterator();
         Iterator it2 = target.iterator();
 
         while(it1.hasNext() && it2.hasNext()) {
-            if(it1.next() != it2.next()) return false;
+            T item1 = (T) it1.next();
+            Object item2 = it2.next();
+            if (!item1.equals(item2)) return false;
         }
 
         return true;

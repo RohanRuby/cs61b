@@ -70,20 +70,20 @@ public class ArrayDequeTest {
     @Test
     public void EqualsTest() {
         ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
-        ArrayDeque<Integer> ad2 = new ArrayDeque<Integer>();
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
         for (int i = 0; i < 10; i++) {
             ad1.addFirst(i);
-            ad2.addFirst(i);
+            lld1.addFirst(i);
         }
-        ad2.removeFirst();
-        ad2.addFirst(111);
-        boolean b = ad1.equals(ad2);
+
+        boolean b = ad1.equals(lld1);
 
     }
 
     @Test
     public void IteratorTest() {
         ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
+
         for (int i = 0; i < 10; i++) {
             ad1.addFirst(i);
         }
