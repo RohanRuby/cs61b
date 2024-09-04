@@ -30,7 +30,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
     public void addFirst(T item){
 
         // If empty, initialize
-        if(this.isEmpty()){
+        if(this.size() == 0){
             Node n = new Node(item);
             front = n;
             back = n;
@@ -47,7 +47,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
 
     public T removeFirst(){
         // If empty, return null
-        if(this.isEmpty()){
+        if(this.size() == 0){
             return null;
         }
         T val = front.data;
@@ -68,7 +68,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
     public void addLast(T item){
 
         // If empty, initialize
-        if(isEmpty()){
+        if(this.size() == 0){
             Node n = new Node(item);
             front = n;
             back = n;
@@ -86,7 +86,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
 
     public T removeLast(){
         // If empty, return null
-        if(this.isEmpty()){
+        if(this.size() == 0){
             return null;
         }
         T val = back.data;
@@ -112,7 +112,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
         }
     }
 
-    private boolean isEmpty(){
+    public boolean isEmpty(){
         if(size == 0) return true;
         return false;
     }
